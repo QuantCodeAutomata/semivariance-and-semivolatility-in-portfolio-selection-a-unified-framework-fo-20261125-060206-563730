@@ -1,0 +1,3 @@
+dataset,max_sharpe_range,model_with_max_range,ew_sharpe_range
+dowjones,0.07978313562348704,MSV_mu,0.025079467698881475
+nasdaq100,0.07825210341612043,MaxSortino_0,0.03546103029931158

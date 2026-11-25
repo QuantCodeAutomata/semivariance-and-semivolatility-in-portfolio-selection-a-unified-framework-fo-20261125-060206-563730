@@ -7,10 +7,10 @@ tau below which deviations are measured is one of: the portfolio mean
 (mode="mu"), the fixed level zero (mode="zero"), or a time-varying
 market-index return tau_t = R_t^I (mode="index").
 
-Context7 was not queried for this module: these are the paper's own
-definitions (Section 2, Lemma 1), not a quantity any portfolio library
-implements with the paper's threshold convention, so they are implemented
-from scratch (paper Eq. (1), (2), (5)).
+These are the paper's own definitions (Section 2, Lemma 1): no portfolio
+library implements a semivariance/semivolatility risk measure with the
+paper's three threshold conventions, so they are implemented from scratch
+(paper Eq. (1), (2), (5)).
 """
 
 from __future__ import annotations

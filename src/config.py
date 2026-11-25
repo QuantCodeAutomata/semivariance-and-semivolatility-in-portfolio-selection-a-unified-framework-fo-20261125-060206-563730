@@ -61,8 +61,7 @@ UB_BASELINE = 1.0  # upper bound on individual normalized weights (no cap), Sect
 TRANSACTION_COST_BPS = 0.0050  # proportional cost on turnover, c_tc, Section 4.1
 RISK_FREE_RATE = 0.0  # annualized risk-free rate r_f used throughout Section 4
 
-# Risk-budgeting / ratio-model numerics (implementation notes, Section 4.1 text
-# around Eq. (4) and (7)):
+# Risk-budgeting / ratio-model numerics (Section 4.1 text around Eq. (4) and (7)):
 RB_LOWER_BOUND = 1e-10  # y_i >= 1e-10 in the risk-budgeting program
 TOL_QP_RATIO = 1e-12  # solver tolerance for quadratic and ratio programs
 TOL_OTHER = 1e-10  # solver tolerance for the remaining (fmincon-type) programs

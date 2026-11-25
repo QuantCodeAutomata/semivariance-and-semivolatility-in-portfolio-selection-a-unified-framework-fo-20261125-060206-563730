@@ -1,0 +1,7 @@
+dataset,offset,spearman_vs_offset0,best_model,n_fallbacks
+dowjones,0,1.0,MDP-SVol_0,0
+dowjones,10,0.9803921568627453,MDP-SVol_0,0
+dowjones,20,0.9975490196078433,MDP-SVol_0,0
+nasdaq100,0,1.0,EW,8
+nasdaq100,10,0.9093137254901962,EW,7
+nasdaq100,20,0.9681372549019608,EW,7

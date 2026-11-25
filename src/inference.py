@@ -3,12 +3,12 @@ differences (Section 4.4.3 and Supplementary Material S.2-S.3): the
 Jobson-Korkie (1981) test with the Memmel (2003) correction, in the
 HAC-robust version of Ledoit and Wolf (2008).
 
-Context7 (arch) confirmed ``arch.bootstrap.CircularBlockBootstrap`` for the
-resampling step, used below exactly as named in the implementation notes; the
-delta-method Sharpe-ratio gradient, the Bartlett-kernel HAC covariance of the
-stacked moment conditions, and the studentized percentile-t procedure are the
-paper's own construction (Section 4.4.3) and are implemented from scratch.
-Holm (1979) multiplicity adjustment uses statsmodels.stats.multitest.
+The resampling step uses ``arch.bootstrap.CircularBlockBootstrap`` from the
+``arch`` package; the delta-method Sharpe-ratio gradient, the
+Bartlett-kernel HAC covariance of the stacked moment conditions, and the
+studentized percentile-t procedure are the paper's own construction
+(Section 4.4.3) and are implemented from scratch. The Holm (1979)
+multiplicity adjustment uses ``statsmodels.stats.multitest``.
 """
 
 from __future__ import annotations

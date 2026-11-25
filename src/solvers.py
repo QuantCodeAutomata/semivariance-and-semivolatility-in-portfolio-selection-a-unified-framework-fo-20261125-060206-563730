@@ -1,12 +1,12 @@
 """Solvers for the seventeen long-only portfolio strategies of Table 3
 (Section 4.2 of the paper).
 
-Context7 (pyportfolioopt / skfolio) was checked for minimum-variance,
-maximum-Sharpe, risk-parity and most-diversified portfolios, but none of
-those libraries exposes the paper's three thresholds (portfolio mean, zero,
-market-index return) for a semivariance/semivolatility risk measure, nor the
-Schaible homogeneous reduction with a linear weight cap; the programs below
-are therefore implemented from scratch against the paper's own formulations
+pyportfolioopt and skfolio offer minimum-variance, maximum-Sharpe,
+risk-parity and most-diversified portfolios, but neither library exposes the
+paper's three thresholds (portfolio mean, zero, market-index return) for a
+semivariance/semivolatility risk measure, nor the Schaible homogeneous
+reduction with a linear weight cap; the programs below are therefore
+implemented from scratch against the paper's own formulations
 (Eq. (3), (4), (7), (10), Lemma 2), using scipy.optimize for the underlying
 quadratic and smooth constrained programs.
 """

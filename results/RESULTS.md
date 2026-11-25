@@ -92,15 +92,31 @@ universe, confirming the paper's qualitative claim that volatility and
 semivolatility, and the zero and below-mean thresholds, are not
 distinguishable within a model family. The paper additionally reports one
 significant Panel-C effect (RP-SVol risk parity on DowJones at the
-benchmark threshold, diff -0.148, Holm p=0.006); in this run no Panel-C pair
-is significant at the reduced 499-replication bootstrap on either dataset.
-This specific point (and overall significance) is not reproduced; the most
-likely cause is the reduced number of bootstrap replications (499 vs. the
-paper's 1999), which widens the bootstrap percentile-t confidence intervals
-and raises Holm-adjusted p-values. This was not re-run at the paper's 1999
-replications within this replication's time limit (see "Deviations from the
-paper"); the cause is therefore identified (fewer bootstrap replications)
-but not re-verified at 1999 replications.
+benchmark threshold, diff -0.148, Holm p=0.006); in this run the Panel-C
+RP-SVol point estimate on DowJones is +0.0010 (annualized), two orders of
+magnitude smaller and of the opposite sign, and no Panel-C pair is
+significant at the reduced 499-replication bootstrap on either dataset.
+
+This point estimate was checked directly against the stored optimal weights
+of the rolling-window backtest (not re-derived from the bootstrap): the
+average L1 distance between the RP-SVol_mu and RP-SVol_RI weight vectors
+over all 200 DowJones windows is 0.026, i.e. the risk-parity solver places
+the mean-threshold and index-threshold semivolatility portfolios within
+about 1.3% of one another in weight space on this realized sample, so their
+out-of-sample Sharpe ratios are necessarily close. The threshold-mode
+formulas (Section 2, Eq. (1)-(2), `src/risk_measures.py`) were re-verified
+against this stored result and are internally consistent (the "index" mode
+uses the realized in-sample vector tau_t = R_t^I, not a scalar); no
+implementation defect was found in the threshold or risk-parity code. The
+number of bootstrap replications (499 vs. the paper's 1999) affects only the
+width of the percentile-t confidence interval and the Holm-adjusted p-value
+around a fixed point estimate, not the point estimate itself, so it cannot
+explain this gap and the earlier attribution to replication count in this
+file was incorrect. The remaining cause of the point-estimate gap — most
+plausibly the difference between the current Dow Jones constituents sampled
+through 2026 and the paper's FactSet sample — was not further isolated
+within this replication's time limit; it is reported here as not identified,
+rather than attributed to the bootstrap count.
 
 ## Experiment 2 — Statistical Significance of Sharpe-Ratio Differences Against Benchmarks
 
@@ -133,12 +149,18 @@ here vs. 6 in the paper) and the Nasdaq100 count (3 here vs. 0 in the paper)
 differ by more than 50% in relative terms. The market-index comparison is
 only partially reproduced: DowJones shows 9 significant outperformers (vs.
 11 in the paper, within range), but Nasdaq100 shows 0 in this run against 5
-in the paper. The reduced bootstrap replication count (499 vs. 1999) and the
-longer realized sample (through 2026-11-20) are the identified, but not
-re-verified at the paper's full replication count, causes of these
-count-level differences; the sign/direction of each benchmark comparison
-(EW not outperformed, MV outperformed more on DowJones than Nasdaq100)
-matches the paper's qualitative pattern.
+in the paper. Two mechanisms can move these counts without changing the underlying
+HAC-robust statistic: the reduced bootstrap replication count (499 vs. 1999)
+coarsens the achievable p-value grid (minimum attainable p-value 1/500 vs.
+1/2000), which can flip a borderline Holm-adjusted comparison across the 5%
+threshold, and the longer realized sample (through 2026-11-20 instead of the
+paper's November-2026 FactSet cutoff) changes the realized out-of-sample
+return series itself. Neither mechanism was isolated by a dedicated run at
+this iteration (no full run at B=1999 replications was performed), so the
+count-level gap is reported as not further identified rather than confirmed;
+the sign/direction of each benchmark comparison (EW not outperformed, MV
+outperformed more on DowJones than Nasdaq100) matches the paper's
+qualitative pattern.
 
 ## Experiment 3 — Portfolio Anatomy: L1 Distance Between Optimal Weight Vectors
 
@@ -212,10 +234,15 @@ ub=0.20 correlations (0.956 DowJones, 0.946 Nasdaq100) are above the paper's
 weight-cap floor of 0.51, consistent with the paper's own finding that
 ub=0.05 (not tested in this reduced run) is the most disruptive cap, while
 larger caps preserve the ordering. The D_H=63 correlations (0.826 DowJones,
-0.865 Nasdaq100) are just below the paper's reported 0.87-0.95 range, a
-difference attributed to the reduced-replication backtest rather than a
-reproduced effect of D_H itself; this was not re-verified against the
-paper's D_H=126 configuration within this run. The within-class sign counts
+0.865 Nasdaq100) are just below the paper's reported 0.87-0.95 range. This
+experiment has no bootstrap step (each Spearman correlation is computed once
+from a deterministic rolling-window backtest), so the gap cannot be a
+replication-count effect; it was not isolated to a specific cause within
+this run and the paper's second D_H=126 configuration, which could show
+whether the correlation recovers or degrades further at a longer holding
+window, was not run.
+
+The within-class sign counts
 are directionally consistent (RP-SVol_mu and MSV_0 preserve their sign in
 5/6 configurations, matching the paper's near-unanimous pattern), but the
 MDP-SVol_mu/MDP-Vol sign in this run (6/6 preserved) does not match the

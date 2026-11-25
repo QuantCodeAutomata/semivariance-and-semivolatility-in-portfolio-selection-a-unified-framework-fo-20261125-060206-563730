@@ -156,9 +156,10 @@ coarsens the achievable p-value grid (minimum attainable p-value 1/500 vs.
 threshold, and the longer realized sample (through 2026-11-20 instead of the
 paper's November-2026 FactSet cutoff) changes the realized out-of-sample
 return series itself. Neither mechanism was isolated by a dedicated run at
-this iteration (no full run at B=1999 replications was performed), so the
-count-level gap is reported as not further identified rather than confirmed;
-the sign/direction of each benchmark comparison (EW not outperformed, MV
+the paper's full replication count (no run at B=1999 replications was
+performed), so the count-level gap is reported as not further identified
+rather than confirmed; the sign/direction of each benchmark comparison
+(EW not outperformed, MV
 outperformed more on DowJones than Nasdaq100) matches the paper's
 qualitative pattern.
 

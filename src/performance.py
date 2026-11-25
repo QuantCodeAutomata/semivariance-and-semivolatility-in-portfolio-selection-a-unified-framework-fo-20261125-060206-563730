@@ -92,6 +92,23 @@ def performance_measures(
     }
 
 
+def sharpe_series(
+    oos_returns: pd.DataFrame,
+    columns: list[str] | None = None,
+    risk_free_annual: float = 0.0,
+) -> pd.Series:
+    """Annualized Sharpe ratio of every column of ``oos_returns`` (a cheap
+    helper for ranking comparisons in exp_4/exp_5; Section 4.3)."""
+    cols = oos_returns.columns if columns is None else columns
+    out = {}
+    for name in cols:
+        r = oos_returns[name].to_numpy(dtype=float)
+        mu_ann = TRADING_DAYS / len(r) * r.sum()
+        sigma_ann = np.sqrt(TRADING_DAYS) * r.std(ddof=1)
+        out[name] = (mu_ann - risk_free_annual) / sigma_ann if sigma_ann > 0 else np.nan
+    return pd.Series(out)
+
+
 def performance_table(
     oos_returns: pd.DataFrame,
     turnover: dict[str, float] | None = None,

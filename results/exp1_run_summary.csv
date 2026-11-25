@@ -1,0 +1,3 @@
+dataset,n_assets,n_windows_Q,n_out_of_sample_obs,n_bootstrap
+dowjones,29,200,4200,499
+nasdaq100,82,145,3045,499

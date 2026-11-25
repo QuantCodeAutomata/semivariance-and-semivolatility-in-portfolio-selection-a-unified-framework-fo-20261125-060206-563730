@@ -104,3 +104,58 @@ SENSITIVITY_UB_GRID_RUN = [0.20]
 
 OFFSETS_PAPER = [0, 3, 7, 10, 13, 17, 20]  # trading-day offsets of the rebalancing start
 OFFSETS_RUN = [0, 10, 20]  # offsets executed in this run; --full uses all seven
+
+# ---------------------------------------------------------------------------
+# Within-family comparison pairs for Table 6 (Section 4.4.3) and the
+# sensitivity/robustness analyses (Supplementary Material S.4-S.5)
+# ---------------------------------------------------------------------------
+
+# Panel A: downside risk measure minus variance-based counterpart, at the
+# below-mean threshold tau = mu^T x (Section 4.4.3, Table 6).
+PANEL_A_PAIRS = [
+    ("MSV_mu", "MV"),
+    ("MaxSortino_mu", "MaxSharpe"),
+    ("RP-SVol_mu", "RP-Vol"),
+    ("MDP-SVol_mu", "MDP-Vol"),
+]
+# Panel B: zero threshold minus below-mean threshold, within each downside
+# family (Section 4.4.3, Table 6).
+PANEL_B_PAIRS = [
+    ("MSV_0", "MSV_mu"),
+    ("MaxSortino_0", "MaxSortino_mu"),
+    ("RP-SVol_0", "RP-SVol_mu"),
+    ("MDP-SVol_0", "MDP-SVol_mu"),
+]
+# Panel C: market-index (benchmark) threshold minus below-mean threshold,
+# within each downside family (Section 4.4.3, Table 6).
+PANEL_C_PAIRS = [
+    ("MSV_RI", "MSV_mu"),
+    ("MaxSortino_RI", "MaxSortino_mu"),
+    ("RP-SVol_RI", "RP-SVol_mu"),
+    ("MDP-SVol_RI", "MDP-SVol_mu"),
+]
+
+# Benchmarks for exp_2 (Section 4.4.3, Supplementary Material Tables S.3-S.4):
+# every one of the seventeen strategies is compared with each benchmark.
+BENCHMARKS = ["EW", "MV", "MarketIndex"]
+
+# Pairs of models for the portfolio-anatomy analysis (Supplementary Material
+# S.3, Table S.6).
+ANATOMY_PAIRS = [
+    ("RP-Vol", "RP-SVol_mu"),
+    ("MSV_0", "MSV_mu"),
+    ("MaxSharpe", "MaxSortino_mu"),
+    ("MV", "MSV_mu"),
+    ("MV", "MSV_0"),
+    ("MDP-Vol", "MDP-SVol_mu"),
+]
+
+# Within-class sign-preservation pairs used by the sensitivity (exp_4) and
+# calendar-offset (exp_5) analyses (Supplementary Material S.4-S.5, Table
+# S.7-S.8): reported as SR(first) - SR(second), expected sign from the
+# baseline configuration in Table 6 / Section 4.4.
+WITHIN_CLASS_SIGN_PAIRS = [
+    ("RP-SVol_mu", "RP-Vol"),
+    ("MDP-SVol_mu", "MDP-Vol"),
+    ("MSV_0", "MV"),
+]

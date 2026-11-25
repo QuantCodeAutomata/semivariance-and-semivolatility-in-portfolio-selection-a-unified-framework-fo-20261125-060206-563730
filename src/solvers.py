@@ -106,8 +106,21 @@ def _schaible_program(
     """min rho(y) s.t. c^T y = 1, y >= 0 (and y_i <= ub * 1^T y if ub < 1),
     then x* = y*/1^T y* (Lemma 2, Eq. (7))."""
     n = len(c)
-    y0 = _equally_weighted(n)
-    y0 = y0 / (c @ y0)
+    ew = _equally_weighted(n)
+    anchor = c @ ew
+    if anchor > 1e-10:
+        # Equally weighted portfolio is itself in the feasible cone C.
+        y0 = ew / anchor
+    else:
+        # c^T(EW) <= 0 is possible even though Delta_C^+ is nonempty (the
+        # paper's non-degeneracy condition only requires max_i c_i > 0, Sec.
+        # 3.5): start instead from the single asset with the largest c_i,
+        # which is always strictly feasible (c^T y0 = 1, y0 >= 0).
+        i_star = int(np.argmax(c))
+        if c[i_star] <= 1e-10:
+            return None
+        y0 = np.zeros(n)
+        y0[i_star] = 1.0 / c[i_star]
     constraints = [LinearConstraint(c, 1.0, 1.0)]
     if ub < 1.0:
         # y_i - ub * sum(y) <= 0 for every i (homogeneous weight cap).

@@ -64,11 +64,15 @@ risk-parity performance. Risk-parity portfolios are again nearly
 indistinguishable between volatility and semivolatility in both universes
 (Sharpe differences of 0.001-0.002), matching the paper's qualitative
 finding. The absolute Sharpe-ratio levels differ from the paper by more than
-10% on several strategies (e.g. Nasdaq100 EW, MaxSortino family), which is
-attributed to the different realized sample window (prices through
-2026-11-20 instead of the paper's unspecified end date) and to the block
-bootstrap being run at 499 instead of 1999 replications (see "Deviations
-from the paper"); the qualitative ranking (model-class ordering) is
+10% on several strategies (e.g. Nasdaq100 EW, MaxSortino family). These are
+point estimates computed directly from the concatenated out-of-sample
+return series (Section 4.1, Step 8), so the bootstrap replication count has
+no bearing on them; the only candidate cause is the realized sample itself —
+the data source (FactSet in the paper vs. the QuantX Dataloader/Massive data
+used here, see "Deviations from the paper") and the realized end date
+(2026-11-20, close to the paper's stated November-2026 cutoff but not
+necessarily identical in trading days). This was not isolated further within
+this replication; the qualitative ranking (model-class ordering) is
 reproduced, but several point Sharpe ratios are not within 10% of the
 paper's table.
 
@@ -149,19 +153,24 @@ here vs. 6 in the paper) and the Nasdaq100 count (3 here vs. 0 in the paper)
 differ by more than 50% in relative terms. The market-index comparison is
 only partially reproduced: DowJones shows 9 significant outperformers (vs.
 11 in the paper, within range), but Nasdaq100 shows 0 in this run against 5
-in the paper. Two mechanisms can move these counts without changing the underlying
-HAC-robust statistic: the reduced bootstrap replication count (499 vs. 1999)
-coarsens the achievable p-value grid (minimum attainable p-value 1/500 vs.
-1/2000), which can flip a borderline Holm-adjusted comparison across the 5%
-threshold, and the longer realized sample (through 2026-11-20 instead of the
-paper's November-2026 FactSet cutoff) changes the realized out-of-sample
-return series itself. Neither mechanism was isolated by a dedicated run at
-the paper's full replication count (no run at B=1999 replications was
-performed), so the count-level gap is reported as not further identified
-rather than confirmed; the sign/direction of each benchmark comparison
-(EW not outperformed, MV
-outperformed more on DowJones than Nasdaq100) matches the paper's
-qualitative pattern.
+in the paper. The point estimates underlying the Nasdaq100 market-index row
+were checked directly in `results/exp2_vs_benchmarks_nasdaq100.csv`: every
+one of the 17 strategy-vs-MarketIndex differences has a p-value between
+0.26 and 0.99, far from the 5% Holm boundary, so the reduced bootstrap
+replication count (499 vs. the paper's 1999) — which only coarsens the
+achievable p-value grid and could flip a borderline comparison — is ruled
+out as the mechanism for this particular row: none of these comparisons are
+borderline. The realized sample end date used here (2026-11-20) is also not
+materially longer than the paper's own stated Nasdaq100 window (through
+November 2026), so a longer sample is likewise not a supported explanation.
+With both candidate mechanisms ruled out, the remaining cause of the
+Nasdaq100 market-index gap is most plausibly a difference in the realized
+price path or constituent set between the FactSet data the paper uses and
+the QuantX Dataloader/Massive data used here (see "Deviations from the
+paper"), but this was not isolated within this replication and is reported
+as not identified. The sign/direction of each benchmark comparison (EW not
+outperformed, MV outperformed more on DowJones than Nasdaq100) matches the
+paper's qualitative pattern.
 
 ## Experiment 3 — Portfolio Anatomy: L1 Distance Between Optimal Weight Vectors
 

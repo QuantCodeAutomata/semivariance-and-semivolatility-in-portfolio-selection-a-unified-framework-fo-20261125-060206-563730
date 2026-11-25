@@ -1,0 +1,9 @@
+dataset,factor,value,spearman_vs_baseline,spearman_common_dates
+dowjones,baseline,,1.0,1.0
+dowjones,D_L,252.0,0.8799019607843139,0.9191176470588237
+dowjones,D_H,63.0,0.8259803921568629,
+dowjones,ub,0.2,0.9558823529411765,
+nasdaq100,baseline,,1.0,1.0
+nasdaq100,D_L,252.0,0.9068627450980394,0.9436274509803922
+nasdaq100,D_H,63.0,0.8651960784313727,
+nasdaq100,ub,0.2,0.9460784313725492,

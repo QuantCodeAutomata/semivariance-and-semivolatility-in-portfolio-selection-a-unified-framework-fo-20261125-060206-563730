@@ -1,0 +1,7 @@
+dataset,benchmark,n_comparisons,n_significantly_outperform,n_significantly_underperform
+dowjones,EW,16,0,2
+dowjones,MV,16,9,0
+dowjones,MarketIndex,17,9,0
+nasdaq100,EW,16,0,0
+nasdaq100,MV,16,3,0
+nasdaq100,MarketIndex,17,0,0

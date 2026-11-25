@@ -1,0 +1,19 @@
+dataset,factor,value,pair,sign_preserved
+dowjones,D_L,252.0,RP-SVol_mu - RP-Vol,True
+dowjones,D_L,252.0,MDP-SVol_mu - MDP-Vol,True
+dowjones,D_L,252.0,MSV_0 - MV,True
+dowjones,D_H,63.0,RP-SVol_mu - RP-Vol,True
+dowjones,D_H,63.0,MDP-SVol_mu - MDP-Vol,True
+dowjones,D_H,63.0,MSV_0 - MV,True
+dowjones,ub,0.2,RP-SVol_mu - RP-Vol,True
+dowjones,ub,0.2,MDP-SVol_mu - MDP-Vol,True
+dowjones,ub,0.2,MSV_0 - MV,True
+nasdaq100,D_L,252.0,RP-SVol_mu - RP-Vol,False
+nasdaq100,D_L,252.0,MDP-SVol_mu - MDP-Vol,True
+nasdaq100,D_L,252.0,MSV_0 - MV,False
+nasdaq100,D_H,63.0,RP-SVol_mu - RP-Vol,True
+nasdaq100,D_H,63.0,MDP-SVol_mu - MDP-Vol,True
+nasdaq100,D_H,63.0,MSV_0 - MV,True
+nasdaq100,ub,0.2,RP-SVol_mu - RP-Vol,True
+nasdaq100,ub,0.2,MDP-SVol_mu - MDP-Vol,True
+nasdaq100,ub,0.2,MSV_0 - MV,True
